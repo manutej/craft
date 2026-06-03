@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 392" width="1000" height="392" fill="none" role="img" aria-label="What AI slop costs: duplication up 8x, churn up ~2x, refactoring down 60%, and developers were more confident.">
+  <defs>
+    <linearGradient id="ecard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0D1117"/><stop offset="1" stop-color="#10141B"/>
+    </linearGradient>
+    <style>
+      text{font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;}
+      .mono{font-family:'SFMono-Regular',ui-monospace,'Cascadia Code',Consolas,monospace;}
+      .v{opacity:0;animation:vf .5s ease forwards;}
+      .v1{animation-delay:1.2s}.v2{animation-delay:1.5s}.v3{animation-delay:1.8s}.v4{animation-delay:2.1s}
+      @keyframes vf{to{opacity:1}}
+    </style>
+  </defs>
+
+  <rect x="2" y="2" width="996" height="388" rx="20" fill="url(#ecard)" stroke="#21262D" stroke-width="1.5"/>
+
+  <text x="48" y="60" font-size="28" font-weight="800" fill="#E6EDF3">What AI slop actually costs</text>
+  <text x="48" y="88" class="mono" font-size="14" letter-spacing="1" fill="#6E7B8A">GitClear · 211M lines of production code · 2020&#8211;2024</text>
+  <line x1="48" y1="108" x2="952" y2="108" stroke="#21262D" stroke-width="1"/>
+
+  <!-- Row 1: duplication up 8x -->
+  <text x="48" y="166" font-size="17" fill="#ADBAC4">Duplicated code blocks</text>
+  <rect x="360" y="150" width="500" height="22" rx="11" fill="#161B22"/>
+  <rect x="360" y="150" width="0" height="22" rx="11" fill="#F85149">
+    <animate attributeName="width" from="0" to="452" dur="1.1s" begin="0.3s" fill="freeze" calcMode="spline" keySplines="0.3 0 0.2 1"/>
+  </rect>
+  <text x="876" y="167" class="mono v v1" font-size="20" font-weight="700" fill="#F85149">&#8593; 8&#215;</text>
+
+  <!-- Row 2: churn up ~2x -->
+  <text x="48" y="226" font-size="17" fill="#ADBAC4">Code churn <tspan fill="#6E7B8A">(reverted &lt; 2 wks)</tspan></text>
+  <rect x="360" y="210" width="500" height="22" rx="11" fill="#161B22"/>
+  <rect x="360" y="210" width="0" height="22" rx="11" fill="#E0823D">
+    <animate attributeName="width" from="0" to="300" dur="1.1s" begin="0.5s" fill="freeze" calcMode="spline" keySplines="0.3 0 0.2 1"/>
+  </rect>
+  <text x="876" y="227" class="mono v v2" font-size="20" font-weight="700" fill="#E0823D">&#8593; ~2&#215;</text>
+
+  <!-- Row 3: refactoring down 60% (ghost = former level, fill = now) -->
+  <text x="48" y="286" font-size="17" fill="#ADBAC4">Refactoring <tspan fill="#6E7B8A">(the good kind)</tspan></text>
+  <rect x="360" y="270" width="500" height="22" rx="11" fill="#161B22"/>
+  <rect x="360" y="270" width="500" height="22" rx="11" fill="none" stroke="#39C5BB" stroke-opacity="0.35" stroke-dasharray="4 4"/>
+  <rect x="360" y="270" width="0" height="22" rx="11" fill="#39C5BB">
+    <animate attributeName="width" from="0" to="200" dur="1.1s" begin="0.7s" fill="freeze" calcMode="spline" keySplines="0.3 0 0.2 1"/>
+  </rect>
+  <text x="876" y="287" class="mono v v3" font-size="20" font-weight="700" fill="#39C5BB">&#8595; 60%</text>
+
+  <!-- bottom callout -->
+  <rect x="48" y="320" width="904" height="44" rx="10" fill="#161B22" stroke="#21262D"/>
+  <text x="68" y="348" class="v v4" font-size="15.5" fill="#8B949E">&#8627;&#8194;and developers were <tspan fill="#F85149" font-weight="700">MORE confident</tspan> the code was correct &#8212; Stanford.</text>
+  <text x="934" y="348" class="mono v v4" font-size="14" fill="#E3B341" text-anchor="end">craft reverses this.</text>
+</svg>

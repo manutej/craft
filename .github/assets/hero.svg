@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" width="1280" height="400" fill="none" role="img" aria-label="craft — senior-engineer guardrails against AI code slop">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F2CC60"/><stop offset="1" stop-color="#E3B341"/>
+    </linearGradient>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#39C5BB"/><stop offset="1" stop-color="#E3B341"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#0D1117"/><stop offset="1" stop-color="#10141B"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#E3B341" stop-opacity="0.10"/><stop offset="1" stop-color="#E3B341" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" stroke="#1B2430" stroke-width="1"/>
+    </pattern>
+    <style>
+      text{font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;}
+      .mono{font-family:'SFMono-Regular',ui-monospace,'Cascadia Code',Consolas,monospace;}
+      .fade{opacity:0;animation:f .85s ease forwards;}
+      .d1{animation-delay:.10s}.d2{animation-delay:.45s}.d3{animation-delay:.95s}
+      .d4{animation-delay:1.15s}.d5{animation-delay:1.35s}.d6{animation-delay:1.55s}
+      @keyframes f{to{opacity:1}}
+    </style>
+  </defs>
+
+  <rect x="2" y="2" width="1276" height="396" rx="22" fill="url(#card)" stroke="#21262D" stroke-width="1.5"/>
+  <rect x="2" y="2" width="1276" height="396" rx="22" fill="url(#grid)" opacity="0.55"/>
+  <rect x="2" y="2" width="1276" height="396" rx="22" fill="url(#glow)"/>
+
+  <!-- text block -->
+  <text x="80" y="92" class="mono fade d1" font-size="15" letter-spacing="4" fill="#6E7B8A">CETI · ENGINEERING GUARDRAILS</text>
+  <text x="74" y="220" class="fade d2" font-size="138" font-weight="800" letter-spacing="-5" fill="url(#gold)">craft</text>
+  <path d="M84 244 H470" stroke="url(#teal)" stroke-width="5" stroke-linecap="round" stroke-dasharray="386" stroke-dashoffset="386">
+    <animate attributeName="stroke-dashoffset" from="386" to="0" dur="0.9s" begin="0.95s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+  </path>
+  <text x="80" y="294" class="fade d4" font-size="27" fill="#ADBAC4">Senior-engineer guardrails against AI code slop.</text>
+
+  <!-- pills -->
+  <g class="fade d5">
+    <rect x="80" y="320" width="104" height="34" rx="17" fill="none" stroke="#E3B341" stroke-opacity="0.55"/>
+    <text x="132" y="343" class="mono" font-size="15" fill="#E3B341" text-anchor="middle">durable</text>
+  </g>
+  <g class="fade d5">
+    <rect x="196" y="320" width="112" height="34" rx="17" fill="none" stroke="#39C5BB" stroke-opacity="0.55"/>
+    <text x="252" y="343" class="mono" font-size="15" fill="#39C5BB" text-anchor="middle">strategic</text>
+  </g>
+  <g class="fade d6">
+    <rect x="320" y="320" width="186" height="34" rx="17" fill="none" stroke="#8B949E" stroke-opacity="0.45"/>
+    <text x="413" y="343" class="mono" font-size="15" fill="#ADBAC4" text-anchor="middle">production-grade</text>
+  </g>
+
+  <!-- slop -> craft motif: red chaos assembling into a gold/teal grid, looping -->
+  <g class="fade d3">
+    <!-- r1 -->
+    <g>
+      <rect x="900" y="150" width="60" height="60" rx="12">
+        <animate attributeName="fill" values="#F85149;#E3B341;#E3B341;#F85149" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;1;1;0.4" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite"/>
+      </rect>
+      <animateTransform attributeName="transform" type="translate" additive="sum" values="-40 -30; 0 0; 0 0; -40 -30" keyTimes="0;0.35;0.8;1" dur="6s" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="rotate" additive="sum" values="-20 930 180; 0 930 180; 0 930 180; -20 930 180" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite"/>
+    </g>
+    <!-- r2 -->
+    <g>
+      <rect x="980" y="150" width="60" height="60" rx="12">
+        <animate attributeName="fill" values="#F85149;#39C5BB;#39C5BB;#F85149" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite" begin="0.2s"/>
+        <animate attributeName="opacity" values="0.4;1;1;0.4" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite" begin="0.2s"/>
+      </rect>
+      <animateTransform attributeName="transform" type="translate" additive="sum" values="30 -45; 0 0; 0 0; 30 -45" keyTimes="0;0.35;0.8;1" dur="6s" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1" repeatCount="indefinite" begin="0.2s"/>
+      <animateTransform attributeName="transform" type="rotate" additive="sum" values="18 1010 180; 0 1010 180; 0 1010 180; 18 1010 180" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite" begin="0.2s"/>
+    </g>
+    <!-- r3 -->
+    <g>
+      <rect x="1060" y="150" width="60" height="60" rx="12">
+        <animate attributeName="fill" values="#F85149;#E3B341;#E3B341;#F85149" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite" begin="0.1s"/>
+        <animate attributeName="opacity" values="0.4;1;1;0.4" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite" begin="0.1s"/>
+      </rect>
+      <animateTransform attributeName="transform" type="translate" additive="sum" values="55 -15; 0 0; 0 0; 55 -15" keyTimes="0;0.35;0.8;1" dur="6s" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1" repeatCount="indefinite" begin="0.1s"/>
+      <animateTransform attributeName="transform" type="rotate" additive="sum" values="-14 1090 180; 0 1090 180; 0 1090 180; -14 1090 180" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite" begin="0.1s"/>
+    </g>
+    <!-- r4 -->
+    <g>
+      <rect x="900" y="230" width="60" height="60" rx="12">
+        <animate attributeName="fill" values="#F85149;#39C5BB;#39C5BB;#F85149" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite" begin="0.25s"/>
+        <animate attributeName="opacity" values="0.4;1;1;0.4" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite" begin="0.25s"/>
+      </rect>
+      <animateTransform attributeName="transform" type="translate" additive="sum" values="-50 25; 0 0; 0 0; -50 25" keyTimes="0;0.35;0.8;1" dur="6s" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1" repeatCount="indefinite" begin="0.25s"/>
+      <animateTransform attributeName="transform" type="rotate" additive="sum" values="22 930 260; 0 930 260; 0 930 260; 22 930 260" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite" begin="0.25s"/>
+    </g>
+    <!-- r5 -->
+    <g>
+      <rect x="980" y="230" width="60" height="60" rx="12">
+        <animate attributeName="fill" values="#F85149;#E3B341;#E3B341;#F85149" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite" begin="0.15s"/>
+        <animate attributeName="opacity" values="0.4;1;1;0.4" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite" begin="0.15s"/>
+      </rect>
+      <animateTransform attributeName="transform" type="translate" additive="sum" values="15 50; 0 0; 0 0; 15 50" keyTimes="0;0.35;0.8;1" dur="6s" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1" repeatCount="indefinite" begin="0.15s"/>
+      <animateTransform attributeName="transform" type="rotate" additive="sum" values="-12 1010 260; 0 1010 260; 0 1010 260; -12 1010 260" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite" begin="0.15s"/>
+    </g>
+    <!-- r6 -->
+    <g>
+      <rect x="1060" y="230" width="60" height="60" rx="12">
+        <animate attributeName="fill" values="#F85149;#E3B341;#E3B341;#F85149" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite" begin="0.3s"/>
+        <animate attributeName="opacity" values="0.4;1;1;0.4" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite" begin="0.3s"/>
+      </rect>
+      <animateTransform attributeName="transform" type="translate" additive="sum" values="45 35; 0 0; 0 0; 45 35" keyTimes="0;0.35;0.8;1" dur="6s" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1" repeatCount="indefinite" begin="0.3s"/>
+      <animateTransform attributeName="transform" type="rotate" additive="sum" values="16 1090 260; 0 1090 260; 0 1090 260; 16 1090 260" keyTimes="0;0.35;0.8;1" dur="6s" repeatCount="indefinite" begin="0.3s"/>
+    </g>
+    <text x="1010" y="334" class="mono" font-size="14" letter-spacing="2" fill="#6E7B8A" text-anchor="middle">tactical&#8201;&#8594;&#8201;strategic</text>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+
+# Logs / temp
+*.log
+tmp/
+.cache/
+
+# Dependency dirs (none expected in this docs-only plugin, but guard anyway)
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+venv/

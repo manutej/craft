@@ -1,0 +1,24 @@
+{
+  "name": "craft",
+  "version": "0.1.0",
+  "description": "Senior-engineer guardrails that stop AI coding agents from shipping slop. Eight composable skills + an always-on rules constitution + a /senior-review gate. Forces strategic (durable) code over tactical (fast-but-disposable) code, grounded in The Pragmatic Programmer, Fowler's Refactoring, Ousterhout's A Philosophy of Software Design, and empirical AI-code-quality research.",
+  "author": {
+    "name": "CETI — Center for Educational Technology Innovations",
+    "url": "https://cetiai.co"
+  },
+  "homepage": "https://cetiai.co",
+  "keywords": [
+    "code-quality",
+    "anti-patterns",
+    "code-smells",
+    "refactoring",
+    "agentic-coding",
+    "guardrails",
+    "dry",
+    "error-handling",
+    "over-engineering",
+    "production-readiness"
+  ],
+  "commands": "./commands",
+  "skills": "./skills"
+}

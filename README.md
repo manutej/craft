@@ -9,6 +9,7 @@
 ![AI slop](https://img.shields.io/badge/AI%20slop-blocked-F85149?style=flat-square&labelColor=0D1117)
 ![works with](https://img.shields.io/badge/Claude%20Code-%2B%20GitHub%20Copilot-8957E5?style=flat-square&labelColor=0D1117)
 ![grounded in](https://img.shields.io/badge/grounded%20in-Pragmatic%20·%20Fowler%20·%20Ousterhout-58A6FF?style=flat-square&labelColor=0D1117)
+![license](https://img.shields.io/badge/license-MIT-3FB950?style=flat-square&labelColor=0D1117)
 
 **Make the AI behave like the 15-year senior who has to _maintain_ this in a year —<br/>not the Tactical Tornado who's moving on tomorrow.**
 

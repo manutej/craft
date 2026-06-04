@@ -1,0 +1,52 @@
+# senior-gate.yml — the mechanical half of craft.
+#
+# Copy this into the repo you want guarded:  .github/workflows/senior-gate.yml
+#
+# Rules-as-prose earn ~25–40% compliance. A REQUIRED CI gate that actually runs
+# your linters, type-checker, and tests gets you to ~95%. This file is that gate.
+# Uncomment the block matching your stack, then make `gate` a required status
+# check in branch protection (Settings → Branches → Require status checks).
+
+name: senior-gate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # ── Node / TypeScript ────────────────────────────────────────────────
+      # - uses: actions/setup-node@v4
+      #   with: { node-version: "20", cache: "npm" }
+      # - run: npm ci
+      # - run: npm run lint
+      # - run: npx tsc --noEmit          # types are the cheapest bug gate there is
+      # - run: npm test -- --run
+
+      # ── Python ───────────────────────────────────────────────────────────
+      # - uses: actions/setup-python@v5
+      #   with: { python-version: "3.12" }
+      # - run: pip install -r requirements.txt
+      # - run: ruff check .
+      # - run: mypy .
+      # - run: pytest -q
+
+      # ── Go ───────────────────────────────────────────────────────────────
+      # - uses: actions/setup-go@v5
+      #   with: { go-version: "1.22" }
+      # - run: go vet ./...
+      # - run: go test -race ./...        # -race is non-negotiable for shared state
+
+      - name: placeholder
+        run: |
+          echo "Replace this step with your stack's lint + typecheck + test (uncomment above),"
+          echo "then mark 'gate' as a required check so a red build blocks the merge."
+          echo "This is what turns the craft rules from advice into enforcement."

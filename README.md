@@ -224,8 +224,13 @@ craft/
 ├── commands/senior-review.md    # the /senior-review gate
 ├── skills/                      # production-grade (router) + 8 guardrails
 ├── references/                  # PRINCIPLES · SMELLS · EVIDENCE · lang/*
-└── dist/github-copilot/         # the Copilot port
+├── dist/github-copilot/         # the Copilot port
+└── dist/ci/                     # mechanical enforcement: CI gate + Copilot-review setup
 ```
+
+### Enforcement — make the rules a hard stop
+
+Rules raise the floor; **gates** change behavior (~40% → ~95% compliance). [`dist/ci/`](dist/ci/) ships a copy-paste **`senior-gate.yml`** (run your lint + type-check + tests as a required check) and a guide to enabling **Copilot's automated PR review** against the shipped rules. This repo dogfoods the idea: its own [`validate`](.github/workflows/validate.yml) workflow checks the manifest, skill frontmatter, SVGs, and links on every push.
 
 ---
 

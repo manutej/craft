@@ -11,10 +11,13 @@
 ![grounded in](https://img.shields.io/badge/grounded%20in-Pragmatic%20·%20Fowler%20·%20Ousterhout-58A6FF?style=flat-square&labelColor=0D1117)
 ![license](https://img.shields.io/badge/license-MIT-3FB950?style=flat-square&labelColor=0D1117)
 [![validate](https://github.com/manutej/craft/actions/workflows/validate.yml/badge.svg)](https://github.com/manutej/craft/actions/workflows/validate.yml)
+[![live site](https://img.shields.io/badge/live%20site-craft--pink--six.vercel.app-E3B341?style=flat-square&labelColor=0D1117)](https://craft-pink-six.vercel.app)
 
 **Make the AI behave like the 15-year senior who has to _maintain_ this in a year —<br/>not the Tactical Tornado who's moving on tomorrow.**
 
-[Why](#why-this-exists) · [Architecture](#architecture) · [The 8 skills](#the-eight-skills) · [The 12 rules](#the-12-rules) · [Copilot port](#also-runs-in-github-copilot) · [Install](#install)
+### → [**See the live site**](https://craft-pink-six.vercel.app) ←
+
+[Why](#why-this-exists) · [Architecture](#architecture) · [The 8 skills](#the-eight-skills) · [The 12 rules](#the-12-rules) · [Copilot port](#also-runs-in-github-copilot) · [Install](#install) · [Live site](https://craft-pink-six.vercel.app)
 
 </div>
 

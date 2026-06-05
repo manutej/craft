@@ -31,6 +31,15 @@ def ok(cond: bool, msg: str) -> None:
         errors.append(msg)
 
 
+def ignored(p: Path) -> bool:
+    """Skip vendored deps and build output (site/dist), but still validate the
+    plugin's own dist/ (the Copilot + CI ports)."""
+    parts = p.relative_to(ROOT).parts
+    if any(seg in ("node_modules", ".git", ".vercel") for seg in parts):
+        return True
+    return parts[:2] == ("site", "dist")
+
+
 # 1 — plugin manifest
 manifest = ROOT / ".claude-plugin" / "plugin.json"
 try:
@@ -57,6 +66,8 @@ for inst in sorted(ROOT.glob("dist/**/instructions/*.instructions.md")):
 
 # 4 — SVG well-formedness + no scripts
 for svg in sorted(ROOT.glob("**/*.svg")):
+    if ignored(svg):
+        continue
     rel = svg.relative_to(ROOT)
     raw = svg.read_text()
     try:
@@ -68,6 +79,8 @@ for svg in sorted(ROOT.glob("**/*.svg")):
 # 5 — relative markdown links / image paths resolve
 LINK = re.compile(r"\]\(([^)]+\.md)\)|src=\"([^\"]+\.svg)\"|\]\(([^)]+\.svg)\)")
 for md in sorted(ROOT.glob("**/*.md")):
+    if ignored(md):
+        continue
     base = md.parent
     for m in LINK.finditer(md.read_text()):
         rel = next(g for g in m.groups() if g).split("#")[0]
@@ -77,7 +90,7 @@ for md in sorted(ROOT.glob("**/*.md")):
         ok(target.exists(), f"{md.relative_to(ROOT)}: broken link -> {rel}")
 
 # report
-total_svgs = len(list(ROOT.glob("**/*.svg")))
+total_svgs = len([s for s in ROOT.glob("**/*.svg") if not ignored(s)])
 total_skills = len(list(ROOT.glob("skills/*/SKILL.md")))
 print(f"craft validate — {checks} assertions over "
       f"{total_skills} skills, {total_svgs} svgs")

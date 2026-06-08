@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import type { CodeSample } from '@/data'
+import { CopyButton } from './CopyButton'
 
 const TONE: Record<string, string> = {
   muted: 'text-[hsl(var(--code-muted))]',
@@ -11,18 +12,25 @@ const TONE: Record<string, string> = {
 /**
  * Editor-style code panel with a constant elevated surface and semantic
  * line tinting (comments muted, the key line in accent / danger / good).
+ * When `copyable`, the header carries a click-to-copy button; `copyText`
+ * overrides what gets copied (defaults to the raw joined lines).
  */
 export function CodeBlock({
   sample,
   accent = 'gold',
+  copyable = false,
+  copyText,
   className,
 }: {
   sample: CodeSample
   accent?: 'gold' | 'teal' | 'danger'
+  copyable?: boolean
+  copyText?: string
   className?: string
 }) {
   const dot =
     accent === 'danger' ? 'bg-danger' : accent === 'teal' ? 'bg-teal' : 'bg-primary'
+  const toCopy = copyText ?? sample.lines.map((l) => l.text).join('\n')
 
   return (
     <div
@@ -39,9 +47,13 @@ export function CodeBlock({
             {sample.filename}
           </span>
         </div>
-        <span className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-[hsl(var(--code-muted))]">
-          {sample.lang}
-        </span>
+        {copyable ? (
+          <CopyButton text={toCopy} />
+        ) : (
+          <span className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-[hsl(var(--code-muted))]">
+            {sample.lang}
+          </span>
+        )}
       </div>
       <pre className="overflow-x-auto px-4 py-4 text-[0.82rem] leading-[1.7]">
         <code className="font-mono text-[hsl(var(--code-fg))]">

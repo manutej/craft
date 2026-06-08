@@ -224,6 +224,321 @@ export const INSTALL_COPILOT: CodeSample = {
   ],
 }
 
+/* ─────────────────────── Install matrix (per platform) ─────────────────────── */
+
+export interface Platform {
+  id: string
+  name: string
+  /** One letter monogram shown in the selector chip. */
+  mark: string
+  /** What craft does once installed on this platform. */
+  tagline: string
+  /** The file/path the rules land in. */
+  target: string
+  /** Exact, click-to-copy install command. Single source: RULES.md. */
+  command: string
+  /** Optional follow-up tip or deeper-port link. */
+  note?: string
+}
+
+const RAW = 'https://raw.githubusercontent.com/manutej/craft/main'
+
+/** Every command is copy-paste runnable as-is. The constitution has ONE source
+ *  (RULES.md); each platform just points its rules file at it. */
+export const PLATFORMS: Platform[] = [
+  {
+    id: 'claude-code',
+    name: 'Claude Code',
+    mark: 'C',
+    tagline: 'Native plugin — 9 skills auto-load by description + a /senior-review gate.',
+    target: '~/.claude/plugins/craft',
+    command: `git clone https://github.com/manutej/craft \\\n  ~/.claude/plugins/craft`,
+    note: 'Then run /senior-review on any diff, or call any skill by name (craft:right-sized-design).',
+  },
+  {
+    id: 'cursor',
+    name: 'Cursor',
+    mark: '⌘',
+    tagline: 'Project Rule — always applied across chat, ⌘K edits, and Composer.',
+    target: '.cursor/rules/craft.mdc',
+    command: `mkdir -p .cursor/rules\ncurl -fsSL ${RAW}/dist/cursor/craft.mdc \\\n  -o .cursor/rules/craft.mdc`,
+    note: 'Legacy Cursor: curl RULES.md -o .cursorrules instead.',
+  },
+  {
+    id: 'copilot',
+    name: 'GitHub Copilot',
+    mark: 'G',
+    tagline: 'Custom instructions for completions, chat, and automated PR review.',
+    target: '.github/copilot-instructions.md',
+    command: `mkdir -p .github\ncurl -fsSL ${RAW}/RULES.md \\\n  -o .github/copilot-instructions.md`,
+    note: 'Per-language rules + a PR-review prompt ship in dist/github-copilot/.',
+  },
+  {
+    id: 'windsurf',
+    name: 'Windsurf',
+    mark: 'W',
+    tagline: 'Cascade rules — loaded into every Cascade and Write session.',
+    target: '.windsurfrules',
+    command: `curl -fsSL ${RAW}/RULES.md -o .windsurfrules`,
+  },
+  {
+    id: 'cline',
+    name: 'Cline / Roo',
+    mark: 'R',
+    tagline: 'Workspace rules for Cline and Roo Code, read on every task.',
+    target: '.clinerules',
+    command: `curl -fsSL ${RAW}/RULES.md -o .clinerules`,
+  },
+  {
+    id: 'agents',
+    name: 'Codex · AGENTS.md',
+    mark: 'A',
+    tagline: 'The cross-tool standard — Codex, Jules, Gemini CLI and more read AGENTS.md.',
+    target: 'AGENTS.md',
+    command: `curl -fsSL ${RAW}/RULES.md -o AGENTS.md`,
+    note: 'One file, many agents. The most portable way to ship the rules to a team.',
+  },
+  {
+    id: 'aider',
+    name: 'Aider',
+    mark: 'a',
+    tagline: 'Conventions file passed to the model on every request.',
+    target: 'CONVENTIONS.md',
+    command: `curl -fsSL ${RAW}/RULES.md -o CONVENTIONS.md`,
+    note: 'Add to .aider.conf.yml:  read: CONVENTIONS.md',
+  },
+]
+
+/* ───────────────────── Case studies (complex before/after) ───────────────────── */
+
+export interface CaseRule {
+  n: number
+  skill: string
+}
+
+export interface Case {
+  id: string
+  /** Short label for the tab strip. */
+  label: string
+  title: string
+  subtitle: string
+  rules: CaseRule[]
+  slop: CodeSample
+  slopNote: string
+  craft: CodeSample
+  craftNote: string
+  /** One-line "why it matters", evidence-backed where possible. */
+  impact: string
+}
+
+/** Six real failure modes craft catches out of the box — seeing is believing. */
+export const CASES: Case[] = [
+  {
+    id: 'over-engineering',
+    label: 'Over-engineering',
+    title: 'A factory and an interface — for exactly one user',
+    subtitle: 'Asked to "add a user," the agent invents an abstraction hierarchy no caller needs.',
+    rules: [
+      { n: 1, skill: 'right-sized-design' },
+      { n: 2, skill: 'right-sized-design' },
+    ],
+    slop: SLOP_SAMPLE,
+    slopNote:
+      'Speculative ABC + builder for a single concrete type — and a catch that swallows the failure. Compiles, ships, breaks quietly.',
+    craft: CRAFT_SAMPLE,
+    craftNote:
+      'One obvious function. Validate at the boundary, no dead interface, errors stay visible. The diff is exactly the ask.',
+    impact:
+      'Speculative generality is the #1 documented AI failure mode. Every unused abstraction is a tax the next engineer pays to change anything.',
+  },
+  {
+    id: 'swallowed-errors',
+    label: 'Swallowed errors',
+    title: 'The fetch that turns a 404 into a "user"',
+    subtitle: 'Untrusted response, no status check, and a catch that returns an empty object on failure.',
+    rules: [{ n: 6, skill: 'robustness-at-boundaries' }],
+    slop: {
+      filename: 'getUser.ts',
+      lang: 'the AI default',
+      lines: [
+        { text: 'async function getUser(id: string) {' },
+        { text: '  try {' },
+        { text: '    const res = await fetch(`/api/users/${id}`)' },
+        { text: '    return await res.json()  // 404 body parsed as a user', tone: 'danger' },
+        { text: '  } catch {' },
+        { text: '    return {}                // network error → silent {}', tone: 'danger' },
+        { text: '  }' },
+        { text: '}' },
+      ],
+    },
+    slopNote:
+      'A 404 returns the error body as if it were a user; a network failure returns {}. Downstream code reads user.name on garbage.',
+    craft: {
+      filename: 'getUser.ts',
+      lang: 'with craft',
+      lines: [
+        { text: 'async function getUser(id: string): Promise<User> {' },
+        { text: '  const res = await fetch(`/api/users/${id}`)' },
+        { text: '  if (!res.ok) throw new ApiError(res.status, id)  // fail loud', tone: 'accent' },
+        { text: '  return UserSchema.parse(await res.json())        // validate shape', tone: 'good' },
+        { text: '}' },
+      ],
+    },
+    craftNote:
+      'Check the status, validate the shape at the boundary, throw a typed error. The failure is now visible and handleable.',
+    impact:
+      'Swallowed errors are the bugs that survive to production and corrupt state silently. craft never lets an error vanish into a return value.',
+  },
+  {
+    id: 'hallucinated-deps',
+    label: 'Hallucinated deps',
+    title: 'Importing a package that does not exist',
+    subtitle: 'The model confidently imports a plausible-sounding library — a typosquat waiting to be registered.',
+    rules: [{ n: 12, skill: 'supply-chain-hygiene' }],
+    slop: {
+      filename: 'parse.py',
+      lang: 'the AI default',
+      lines: [
+        { text: 'import requesocks            # typosquat of "requests"', tone: 'danger' },
+        { text: 'from datetime_utils import parse  # invented module', tone: 'danger' },
+        { text: '' },
+        { text: 'ts = parse(payload["created"])' },
+        { text: 'r  = requesocks.get(url)' },
+      ],
+    },
+    slopNote:
+      'Both imports look reasonable; neither is real. The day an attacker registers "requesocks" on PyPI, this becomes a supply-chain breach.',
+    craft: {
+      filename: 'parse.py',
+      lang: 'with craft',
+      lines: [
+        { text: '# verified on PyPI: real, canonical, maintained.', tone: 'muted' },
+        { text: 'from datetime import datetime', tone: 'good' },
+        { text: 'import requests              # the canonical client', tone: 'good' },
+        { text: '' },
+        { text: 'ts = datetime.fromisoformat(payload["created"])' },
+        { text: 'r  = requests.get(url, timeout=10)' },
+      ],
+    },
+    craftNote:
+      'Verify every new dependency exists and is canonical before it touches the lockfile. Prefer the stdlib when it already does the job.',
+    impact:
+      '~19.7% of AI-suggested packages do not exist (USENIX Security 2025, 576k samples). One installed typosquat compromises the whole build.',
+  },
+  {
+    id: 'duplication',
+    label: 'Duplication',
+    title: 'Re-implementing a helper that already exists',
+    subtitle: 'The agent writes slugify from scratch — the fourth near-copy in the codebase.',
+    rules: [
+      { n: 3, skill: 'dry-and-reuse' },
+      { n: 4, skill: 'dry-and-reuse' },
+    ],
+    slop: {
+      filename: 'post.ts',
+      lang: 'the AI default',
+      lines: [
+        { text: '// re-invents lib/text.ts → slugify(), subtly different', tone: 'danger' },
+        { text: 'function makeSlug(s: string) {' },
+        { text: "  return s.toLowerCase()" },
+        { text: "    .replace(/[^a-z0-9]+/g, '-')" },
+        { text: "    .replace(/^-|-$/g, '')   // off-by-one vs the real one", tone: 'danger' },
+        { text: '}' },
+      ],
+    },
+    slopNote:
+      'A fourth copy of logic that already lives in lib/text.ts — and it handles edge cases differently. Now a bug must be fixed in four places.',
+    craft: {
+      filename: 'post.ts',
+      lang: 'with craft',
+      lines: [
+        { text: "import { slugify } from '@/lib/text'  // grep first", tone: 'accent' },
+        { text: '' },
+        { text: 'const slug = slugify(title)' },
+        { text: '// one definition. fix a bug once, not in four files.', tone: 'muted' },
+      ],
+    },
+    craftNote:
+      'Search before you build. Reuse the existing utility; if it needs a tweak, improve the one source everyone shares.',
+    impact:
+      'Duplicated code carries 15–50% more defects. GitClear measured the AI signature across 211M lines: copy-paste up 8×, refactoring down 60%.',
+  },
+  {
+    id: 'fake-tests',
+    label: 'Fake-green tests',
+    title: 'A test that asserts on its own mock',
+    subtitle: 'It is green forever and proves nothing — the most common way "done" is a lie.',
+    rules: [{ n: 10, skill: 'trustworthy-tests' }],
+    slop: {
+      filename: 'charge.test.ts',
+      lang: 'the AI default',
+      lines: [
+        { text: "test('charges the card', () => {" },
+        { text: '  const charge = jest.fn()' },
+        { text: '    .mockReturnValue({ ok: true })' },
+        { text: '  const res = charge(100)' },
+        { text: '  expect(res.ok).toBe(true)  // asserts the mock', tone: 'danger' },
+        { text: '})  // green even if charging is completely broken', tone: 'danger' },
+      ],
+    },
+    slopNote:
+      'The test sets up a mock and then asserts the mock returned what the mock was told to return. The real charge logic is never exercised.',
+    craft: {
+      filename: 'charge.test.ts',
+      lang: 'with craft',
+      lines: [
+        { text: "test('charges the card', async () => {" },
+        { text: '  const gateway = new FakeGateway()' },
+        { text: '  await chargeOrder(order, gateway)', tone: 'accent' },
+        { text: '  expect(gateway.captured).toEqual(', tone: 'good' },
+        { text: "    [{ amount: 100, currency: 'usd' }])", tone: 'good' },
+        { text: '})  // fails the moment the charge logic breaks' },
+      ],
+    },
+    craftNote:
+      'Assert observable behavior against a real fake, not the mock you just wrote. The test now fails when the behavior regresses.',
+    impact:
+      'Tautological tests give fake-green CI — the illusion of coverage. Stanford found AI-assisted devs were more confident and more wrong, especially on security.',
+  },
+  {
+    id: 'effects-tangle',
+    label: 'Logic ⊗ I/O',
+    title: 'Business logic tangled with the database and Stripe',
+    subtitle: 'The discount rule is buried between two DB calls and a network charge — untestable without heavy mocks.',
+    rules: [{ n: 7, skill: 'effects-and-purity' }],
+    slop: {
+      filename: 'cart.py',
+      lang: 'the AI default',
+      lines: [
+        { text: 'def price_cart(cart_id):' },
+        { text: '    cart = db.query(Cart).get(cart_id)        # I/O', tone: 'muted' },
+        { text: '    total = sum(i.price * i.qty for i in cart.items)' },
+        { text: '    if total > 100: total *= 0.9   # rule, buried', tone: 'danger' },
+        { text: '    db.execute("UPDATE carts ...")            # I/O', tone: 'muted' },
+        { text: '    stripe.charge(total)        # side effect', tone: 'danger' },
+      ],
+    },
+    slopNote:
+      'To unit-test "orders over $100 get 10% off" you must mock a database and a payment gateway. So nobody does, and the rule drifts.',
+    craft: {
+      filename: 'cart.py',
+      lang: 'with craft',
+      lines: [
+        { text: '# pure core: no DB, no network — provable in microseconds', tone: 'muted' },
+        { text: 'def discounted_total(items: list[Item]) -> Money:', tone: 'accent' },
+        { text: '    total = sum(i.price * i.qty for i in items)' },
+        { text: '    return total * 0.9 if total > 100 else total', tone: 'good' },
+        { text: '' },
+        { text: '# the shell does the I/O and calls this. logic stays testable.', tone: 'muted' },
+      ],
+    },
+    craftNote:
+      'Functional core, imperative shell. The decision is a pure function; I/O lives at the edges. The rule is now trivially unit-tested.',
+    impact:
+      'When logic is welded to I/O, tests need elaborate mocks — so the most important rules go untested. Separation makes correctness cheap to prove.',
+  },
+]
+
 export interface Source {
   title: string
   author: string

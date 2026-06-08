@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 260" width="900" height="260" role="img" aria-label="How craft works: your change flows through the production-grade router and the skills, to a proven verdict.">
+  <defs>
+    <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#E3B341"/>
+      <stop offset="0.5" stop-color="#39C5BB"/>
+      <stop offset="1" stop-color="#E3B341"/>
+    </linearGradient>
+    <style>
+      .bg    { fill:#0C0B0A; stroke:#211C16; stroke-width:1; }
+      .node  { fill:#15130F; stroke:#2A241C; stroke-width:1.2; }
+      .gold  { stroke:#E3B341; }
+      .teal  { stroke:#39C5BB; }
+      .t     { font-family:'JetBrains Mono',ui-monospace,monospace; }
+      .lbl   { fill:#F4EFE7; font-weight:700; font-size:15px; }
+      .sub   { fill:#A9A399; font-size:11px; }
+      .eye   { fill:#E3B341; font-size:11px; letter-spacing:2px; }
+      .cap   { fill:#A9A399; font-size:12px; }
+      .ship  { fill:#39C5BB; font-weight:700; font-size:16px; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="1" y="1" width="898" height="258" rx="16"/>
+  <text class="t eye" x="28" y="34">HOW&#160;CRAFT&#160;WORKS</text>
+
+  <!-- connecting line with flowing dashes -->
+  <line x1="120" y1="132" x2="780" y2="132" stroke="url(#flow)" stroke-width="2" stroke-dasharray="6 8" opacity="0.7">
+    <animate attributeName="stroke-dashoffset" from="56" to="0" dur="1.4s" repeatCount="indefinite"/>
+  </line>
+
+  <!-- traveling pulse -->
+  <circle r="5" fill="#E3B341" cy="132">
+    <animate attributeName="cx" values="120;780" dur="4.2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    <animate attributeName="opacity" values="0;1;1;0" dur="4.2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- node 1: your change -->
+  <g>
+    <rect class="node" x="40" y="104" width="160" height="56" rx="10"/>
+    <text class="t lbl" x="120" y="130" text-anchor="middle">your change</text>
+    <text class="t sub" x="120" y="148" text-anchor="middle">raw AI diff</text>
+    <animate attributeName="opacity" values="0.35;1;1;1" dur="4.2s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- node 2: router -->
+  <g>
+    <rect class="node gold" x="245" y="104" width="170" height="56" rx="10"/>
+    <text class="t lbl" x="330" y="130" text-anchor="middle">production-grade</text>
+    <text class="t sub" x="330" y="148" text-anchor="middle">the router</text>
+    <animate attributeName="opacity" values="0.35;0.35;1;1" dur="4.2s" repeatCount="indefinite" keyTimes="0;0.25;0.35;1"/>
+  </g>
+
+  <!-- node 3: skills -->
+  <g>
+    <rect class="node teal" x="460" y="104" width="170" height="56" rx="10"/>
+    <text class="t lbl" x="545" y="130" text-anchor="middle">8 skills</text>
+    <text class="t sub" x="545" y="148" text-anchor="middle">detect &#38; fix</text>
+    <animate attributeName="opacity" values="0.35;0.35;0.35;1" dur="4.2s" repeatCount="indefinite" keyTimes="0;0.45;0.55;1"/>
+  </g>
+
+  <!-- node 4: verdict -->
+  <g>
+    <rect class="node" x="675" y="104" width="185" height="56" rx="10"/>
+    <text class="t ship" x="767" y="130" text-anchor="middle">SHIP&#160;&#10003;</text>
+    <text class="t sub" x="767" y="148" text-anchor="middle">proven, with evidence</text>
+    <animate attributeName="opacity" values="0;0;0;0;1;1" dur="4.2s" repeatCount="indefinite" keyTimes="0;0.6;0.72;0.8;0.85;1"/>
+  </g>
+
+  <!-- rotating "catches" caption -->
+  <text class="t cap" x="450" y="216" text-anchor="middle">
+    <tspan>catches: over-engineering, then re-checks every boundary</tspan>
+    <animate attributeName="opacity" values="0;1;1;0" dur="3s" begin="0s" repeatCount="indefinite"/>
+  </text>
+  <text class="t cap" x="450" y="216" text-anchor="middle">
+    <tspan>catches: swallowed errors &#183; hallucinated dependencies</tspan>
+    <animate attributeName="opacity" values="0;0;1;1;0" dur="3s" begin="3s" repeatCount="indefinite"/>
+  </text>
+  <text class="t cap" x="450" y="216" text-anchor="middle" opacity="0">
+    <tspan>catches: duplication &#183; fake-green tests &#183; tangled I/O</tspan>
+    <animate attributeName="opacity" values="0;1;1;0" dur="3s" begin="6s" repeatCount="indefinite"/>
+  </text>
+</svg>

@@ -1,0 +1,38 @@
+{
+  "name": "craft",
+  "owner": {
+    "name": "CETI — Center for Educational Technology Innovations",
+    "email": "cetiaiservices@gmail.com"
+  },
+  "description": "Senior-engineer code-quality guardrails for agentic coding — nine skills (eight composable guardrails + a production-grade router) plus an always-on rules constitution and a /senior-review gate that stop AI agents from shipping slop. Grounded in The Pragmatic Programmer, Fowler's Refactoring, Ousterhout's A Philosophy of Software Design, and empirical AI-code-quality research.",
+  "version": "0.1.0",
+  "plugins": [
+    {
+      "name": "craft",
+      "source": ".",
+      "displayName": "Craft — Senior-Engineer Code-Quality Guardrails",
+      "description": "Eight composable skills + an always-on rules constitution + a /senior-review gate. Forces strategic (durable) code over tactical (fast-but-disposable) code: code-smells detection, DRY/reuse discipline, effects-vs-purity separation, naming-and-comments, right-sized-design (anti over-engineering), robustness-at-boundaries, supply-chain-hygiene (catches hallucinated packages), and trustworthy-tests — all orchestrated by a production-grade router skill. Use it FIRST on any 'is this production-ready?' or 'review this diff/PR' request.",
+      "version": "0.1.0",
+      "author": {
+        "name": "CETI — Center for Educational Technology Innovations",
+        "email": "cetiaiservices@gmail.com"
+      },
+      "homepage": "https://cetiai.co",
+      "license": "MIT",
+      "category": "Code Quality",
+      "tags": [
+        "code-quality",
+        "anti-patterns",
+        "code-smells",
+        "refactoring",
+        "agentic-coding",
+        "guardrails",
+        "dry",
+        "error-handling",
+        "over-engineering",
+        "production-readiness"
+      ],
+      "keywords": ["code-quality", "anti-patterns", "refactoring", "guardrails", "agentic-coding"]
+    }
+  ]
+}

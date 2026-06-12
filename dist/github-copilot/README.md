@@ -8,7 +8,7 @@ any model Copilot supports). This is a drop-in `.github/` bundle.
 
 ```
 .github/
-├── copilot-instructions.md          ← always-on constitution (the 12 rules + Definition of Done)
+├── copilot-instructions.md          ← always-on constitution (the 13 rules + Definition of Done)
 ├── instructions/                    ← path-triggered guidance (VS Code)
 │   ├── right-sized-design.instructions.md        applyTo: **
 │   ├── robustness-at-boundaries.instructions.md  applyTo: **

@@ -17,7 +17,7 @@
 
 ### → [**See the live site**](https://craft-pink-six.vercel.app) ←
 
-[Why](#why-this-exists) · [How it works](#how-it-works) · [What it catches](#what-it-catches) · [The 8 skills](#the-eight-skills) · [The 12 rules](#the-12-rules) · [Install on any tool](#install--any-agentic-tool) · [Live site](https://craft-pink-six.vercel.app)
+[Why](#why-this-exists) · [How it works](#how-it-works) · [What it catches](#what-it-catches) · [The 9 skills](#the-nine-skills) · [The 13 rules](#the-13-rules) · [Install on any tool](#install--any-agentic-tool) · [Live site](https://craft-pink-six.vercel.app)
 
 </div>
 
@@ -43,7 +43,7 @@ The core diagnosis: **an AI coding agent is a "Tactical Tornado"** (Ousterhout) 
 
 <div align="center">
 
-<img src=".github/assets/how-it-works.svg" alt="How craft works: your change flows through the production-grade router and the eight skills to a proven verdict" width="100%">
+<img src=".github/assets/how-it-works.svg" alt="How craft works: your change flows through the production-grade router and the nine skills to a proven verdict" width="100%">
 
 </div>
 
@@ -112,7 +112,7 @@ The one most reviewers miss — a dependency that simply **does not exist** (~19
 
 ---
 
-## The eight skills
+## The nine skills
 
 Tier-1 are the 80/20 — the four that attack the most-documented failure mechanisms. Click to expand.
 
@@ -209,9 +209,23 @@ Vague names (`data`, `tmp`, `Manager`) and comments that restate the code are sl
 
 </details>
 
+<details>
+<summary><b>🗄️ data-and-state-evolution</b> &nbsp;·&nbsp; expand→migrate→contract · safe schema changes</summary>
+
+<br/>
+
+**Catches** the slop a diff can't show: a migration that's fine on dev and locks a 10M-row table in prod, a renamed column that 500s the old code still running mid-deploy, a backfill with no rollback. Every persistent-shape change ships in phases — expand, migrate, contract — with a dry-run on a copy as evidence.
+
+```diff
+- ALTER TABLE users RENAME COLUMN username TO handle;   -- breaks every running instance
++ ALTER TABLE users ADD COLUMN handle TEXT;             -- 1. expand (additive, safe)
++ -- 2. code writes both / reads either · batched backfill · 3. contract later
+```
+</details>
+
 ---
 
-## The 12 rules
+## The 13 rules
 
 The always-on constitution ([`RULES.md`](RULES.md)) — drop it into your repo's `CLAUDE.md` / `AGENTS.md` / `.cursorrules`:
 
@@ -223,8 +237,9 @@ The always-on constitution ([`RULES.md`](RULES.md)) — drop it into your repo's
 | 4 | Consolidate, don't clone | 10 | No tautological tests; prove it ran |
 | 5 | Match the codebase, not your defaults | 11 | Pin untested code before refactoring |
 | 6 | Validate at the boundary; never swallow errors | 12 | Verify every dependency; never hardcode secrets |
+| | | 13 | Data outlives code: expand → migrate → contract |
 
-…closed by a **Definition of Done** that requires _"I ran it — here's the evidence."_
+…closed by a **Definition of Done** that requires _"I ran it — here's the evidence"_, a test seen **red before green**, and a dry-run for every migration.
 
 ### Three-tier instructions
 
@@ -238,8 +253,8 @@ Each skill is layered so context is spent only when needed:
 
 [`dist/github-copilot/`](dist/github-copilot/) ports the same guardrails to Copilot (with GPT or any model), so the whole team is covered:
 
-- **`copilot-instructions.md`** — the 12 rules; honored by completions, chat, **and Copilot's PR review**, on every IDE.
-- **`instructions/*.instructions.md`** — path-triggered per-topic guidance (the 8 skills + Python/TypeScript/Go tells).
+- **`copilot-instructions.md`** — the 13 rules; honored by completions, chat, **and Copilot's PR review**, on every IDE.
+- **`instructions/*.instructions.md`** — path-triggered per-topic guidance (the 9 skills + Python/TypeScript/Go tells).
 - **`prompts/senior-review.prompt.md`** — `/senior-review` in Copilot Chat.
 
 The port trades fidelity for portability (no intent-based auto-trigger, no hooks), so lean on **CI + Copilot PR review** for enforcement. Rules-as-prose get ~25–40% compliance; mechanical gates reach ~95%.
@@ -251,7 +266,7 @@ The port trades fidelity for portability (no intent-based auto-trigger, no hooks
 One constitution ([`RULES.md`](RULES.md)), every platform. **Pick your tool, copy one command** (hover any block on GitHub for the copy button), commit. Same rules everywhere — adopt on one repo or roll out to a whole class.
 
 <details open>
-<summary><b>Claude Code</b> — native plugin: 8 skills + a router auto-load, plus the <code>/senior-review</code> gate</summary>
+<summary><b>Claude Code</b> — native plugin: 9 skills + a router auto-load, plus the <code>/senior-review</code> gate</summary>
 
 ```bash
 git clone https://github.com/manutej/craft ~/.claude/plugins/craft

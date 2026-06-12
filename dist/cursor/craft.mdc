@@ -26,7 +26,7 @@ Ask of every change: *did this make the system easier to change, or harder?*
 
 ---
 
-## The 12 rules
+## The 13 rules
 
 1. **Smallest change that satisfies the request.** No unrequested features, files,
    abstractions, config, or "while I'm here" edits. The diff must match the ask.
@@ -82,6 +82,13 @@ Ask of every change: *did this make the system easier to change, or harder?*
     methods/fields that aren't in the actual type/docs. Never hard-code secrets or
     environment-specific values — config lives in the environment. *(12-Factor.)*
 
+13. **Data outlives code: change persistent shapes in phases, never in one shot.**
+    Any backward-incompatible change to a schema, payload, or event ships as
+    expand → migrate → contract, so old and new code survive the same deploy window.
+    `NOT NULL` needs a default or backfill; big backfills run batched; every
+    migration has a tested rollback and a dry-run on a copy. *(Fowler & Sadalage:
+    "all database changes are migrations.")*
+
 ---
 
 ## Definition of Done (the gate)
@@ -96,6 +103,10 @@ hand off:
 - [ ] Names are intention-revealing; comments explain *why*, not *what*.
 - [ ] Tests assert **behavior**, not mocks; they fail when the behavior breaks.
 - [ ] **I ran it.** Here is the evidence: `<command output / request / screenshot>`.
+- [ ] Any new/changed test was seen to **fail before** the change and **pass after**
+      (red → green) — or it's marked as never-seen-red.
+- [ ] Any schema/data change: migration dry-run on a copy, rollback tested, backfill
+      batched.
 - [ ] Every new dependency verified to exist and be the canonical package.
 - [ ] I can answer: *"How did this change make the system easier to change?"*
 
@@ -114,6 +125,7 @@ If you cannot honestly check a box, say so. **"It probably works" is not done.**
 | Mix logic with I/O / mutation | `craft:effects-and-purity` |
 | Name things / write comments | `craft:naming-and-comments` |
 | Write or judge tests | `craft:trustworthy-tests` |
+| Write a migration / alter a schema / change a data shape | `craft:data-and-state-evolution` |
 | Add a dependency / call an external API | `craft:supply-chain-hygiene` |
 | Review a whole diff / "is this production-ready?" | `craft:production-grade` (router) |
 

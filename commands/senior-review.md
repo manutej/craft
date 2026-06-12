@@ -37,8 +37,11 @@ chain in order. Fire each lens only where the diff actually touches that concern
    hidden mutation; untestable-without-mocks.
 6. **Clarity** (`craft:naming-and-comments`) — vague names; comments that restate code.
 7. **Trust** (`craft:trustworthy-tests`) — do tests prove behavior? Is there **evidence
-   the code actually ran**?
-8. **Supply chain** (`craft:supply-chain-hygiene`) — every dependency real & canonical?
+   the code actually ran**? Was any new test ever seen **red**?
+8. **Data & state** (`craft:data-and-state-evolution`) — does any schema/payload/event
+   change survive a deploy window (expand→contract)? rollback tested? NOT NULL
+   backfilled? backfill batched? dry-run evidence on a copy?
+9. **Supply chain** (`craft:supply-chain-hygiene`) — every dependency real & canonical?
    any hallucinated API call? any inlined secret?
 
 Then **merge and dedupe**: one root cause may trip several lenses — report it once.
@@ -61,12 +64,23 @@ Rank by **severity = job-damage × fix-cheapness**.
 
 ## Definition-of-Done check  (from craft RULES.md)
 - [x]/[ ] minimal diff · reuse · no speculative abstraction · validated edges ·
-  no swallowed errors · no secrets · honest tests · ran-with-evidence · deps verified
+  no swallowed errors · no secrets · honest tests · ran-with-evidence ·
+  red→green shown · migrations dry-run+rollback · deps verified
 ```
 
 Rules for the review itself: cite the **named principle** and **file:line** for every
 finding, always give the **fix**, rank worst-first, and never assert taste without a
-principle. Brief praise is fine; this is editing, not a performance review. If you can't
-verify the code ran, say so — don't rubber-stamp a "production-ready" claim.
+principle. Brief praise is fine; this is editing, not a performance review.
+
+**Honesty rules (a review that fakes its checks is itself slop):**
+- You did not write this code; your only incentive is to find what's wrong. Do **not**
+  pass it to clear the queue.
+- Separate what you **verified** from what you **assume**. Anything you could not
+  check (code never ran, citation from memory, table size unknown) is tagged
+  `UNVERIFIED` by name — never silently folded into the verdict.
+- A diff with no run evidence cannot earn **SHIP**: the ceiling is SHIP-WITH-FIXES,
+  with the missing evidence listed as the fix. On-sight review structurally cannot
+  see clean-but-wrong logic, races, or at-scale migration cost — say what this
+  review could not see rather than overclaiming coverage.
 
 Full guardrail definitions: the `craft` skills. The constitution: `craft/RULES.md`.

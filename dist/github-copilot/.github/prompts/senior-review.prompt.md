@@ -32,9 +32,13 @@ specified, review the working tree changes (`git diff`) and the files it touches
 6. **Clarity** — vague names (`data`, `tmp`, `handle`, `Manager`); comments that merely
    restate the code; magic numbers without a named constant.
 7. **Trust** — do the tests assert observable behavior (not just that a mock was
-   called)? Are edge/error paths covered? Is there **evidence the code was actually
-   run**, or only a "should work" claim?
-8. **Supply chain** — is every new dependency real and canonical (not hallucinated /
+   called)? Are edge/error paths covered? Was any new test seen to **fail before** the
+   change? Is there **evidence the code was actually run**, or only a "should work"
+   claim?
+8. **Data & state** — does any schema/payload/event change survive a deploy window
+   (expand → migrate → contract)? `NOT NULL` backfilled? Rollback tested? Backfill
+   batched? Dry-run evidence on a copy?
+9. **Supply chain** — is every new dependency real and canonical (not hallucinated /
    typosquatted)? Any called method/field/endpoint that isn't in the real API?
 
 Merge and dedupe — one root cause may trip several lenses; report it once. Rank by
@@ -57,10 +61,13 @@ Merge and dedupe — one root cause may trip several lenses; report it once. Ran
 
 ## Definition-of-Done check
 - [x]/[ ] minimal diff · reuse · no speculative abstraction · validated edges ·
-  no swallowed errors · no secrets · honest tests · ran-with-evidence · deps verified
+  no swallowed errors · no secrets · honest tests · ran-with-evidence ·
+  red→green shown · migrations dry-run+rollback · deps verified
 ```
 
 Cite the **named principle** and **file:line** for every finding, always give the
 **fix**, and rank worst-first. Never assert taste without a principle. Brief praise is
-fine — this is editing, not a performance review. If you can't verify the code ran, say
-so; don't rubber-stamp a "production-ready" claim.
+fine — this is editing, not a performance review. Separate what you **verified** from
+what you **assume** — tag anything you could not check `UNVERIFIED` by name. A diff with
+no run evidence cannot earn SHIP; cap it at SHIP-WITH-FIXES with the missing evidence
+listed as the fix.

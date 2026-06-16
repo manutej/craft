@@ -7,6 +7,7 @@ import {
   Split,
   Tag,
   PackageCheck,
+  Database,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -20,7 +21,7 @@ export interface Skill {
   catches: string
 }
 
-/** The eight functional skills — descriptions distilled from each SKILL.md. */
+/** The nine functional skills — descriptions distilled from each SKILL.md. */
 export const SKILLS: Skill[] = [
   {
     name: 'right-sized-design',
@@ -78,6 +79,13 @@ export const SKILLS: Skill[] = [
     blurb: 'The verification gate AI agents skip — before a hallucinated import reaches your lockfile.',
     catches: 'Hallucinated packages & APIs, typosquats, inlined secrets.',
   },
+  {
+    name: 'data-and-state-evolution',
+    icon: Database,
+    accent: 'gold',
+    blurb: 'Makes schema, migration, and data-shape changes safe to ship — the slop a diff can\'t show.',
+    catches: 'One-shot breaking changes, NOT NULL without backfill, missing rollbacks, table-locking backfills.',
+  },
 ]
 
 export interface Rule {
@@ -85,7 +93,7 @@ export interface Rule {
   title: string
 }
 
-/** The 12-rule constitution (verbatim short form from RULES.md). */
+/** The 13-rule constitution (verbatim short form from RULES.md). */
 export const RULES: Rule[] = [
   { n: 1, title: 'Smallest change that satisfies the request.' },
   { n: 2, title: 'No abstraction until it has earned its place (≥2–3 real call sites).' },
@@ -99,6 +107,7 @@ export const RULES: Rule[] = [
   { n: 10, title: 'No tautological tests; prove it actually ran.' },
   { n: 11, title: 'Before refactoring untested code, pin it first.' },
   { n: 12, title: "Trust no dependency or API you haven't verified exists." },
+  { n: 13, title: 'Data outlives code: change persistent shapes in phases, never in one shot.' },
 ]
 
 export interface Stat {
@@ -218,7 +227,7 @@ export const INSTALL_COPILOT: CodeSample = {
     { text: '# drop the Copilot port into your repo', tone: 'muted' },
     { text: 'cp -r craft/dist/github-copilot/.github .' },
     { text: '' },
-    { text: '# Copilot now reviews every PR against the 12 rules', tone: 'muted' },
+    { text: '# Copilot now reviews every PR against the 13 rules', tone: 'muted' },
     { text: '#   — completions, chat, and automated PR review', tone: 'muted' },
     { text: 'git add .github && git commit -m "adopt craft"', tone: 'good' },
   ],

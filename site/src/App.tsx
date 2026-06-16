@@ -64,7 +64,7 @@ export default function App() {
               <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
                 AI agents write fast and leave a maintenance wake — duplication up,
                 refactoring down, confident-but-wrong everywhere. <strong className="font-semibold text-foreground">craft</strong> is
-                a plugin of eight skills and a twelve-rule constitution that makes
+                a plugin of nine skills and a thirteen-rule constitution that makes
                 your agent write the <em className="text-foreground not-italic underline decoration-teal/50 underline-offset-4">strategic</em> version —
                 and prove it before it says “done.”
               </p>
@@ -171,10 +171,10 @@ export default function App() {
         </div>
       </section>
 
-      {/* ───────────────────── The eight skills ───────────────────── */}
+      {/* ───────────────────── The nine skills ───────────────────── */}
       <section id="skills" className="border-b border-border py-20 sm:py-28">
         <div className="container">
-          <SectionHeading eyebrow="The toolkit" title="Eight skills, one router">
+          <SectionHeading eyebrow="The toolkit" title="Nine skills, one router">
             Each skill targets a documented AI failure mode. The{' '}
             <code className="font-mono text-primary">production-grade</code> router fires
             the right ones — before code is written, or to audit a diff after.
@@ -220,10 +220,10 @@ export default function App() {
         </div>
       </section>
 
-      {/* ───────────────────── The 12 rules ───────────────────── */}
+      {/* ───────────────────── The 13 rules ───────────────────── */}
       <section id="rules" className="border-b border-border py-20 sm:py-28">
         <div className="container">
-          <SectionHeading eyebrow="The constitution" title="Twelve rules, always on">
+          <SectionHeading eyebrow="The constitution" title="Thirteen rules, always on">
             Loaded into every session. They distill the judgment a 15-year engineer
             applies without thinking — made explicit so your agent does too.
           </SectionHeading>

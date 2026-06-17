@@ -1,25 +1,17 @@
-import { ArrowRight, Check, Terminal, Sparkles } from 'lucide-react'
+import { ArrowRight, Check, Sparkles } from 'lucide-react'
 import { GithubIcon } from './components/GithubIcon'
 import { Navbar } from './components/Navbar'
 import { SectionHeading } from './components/SectionHeading'
-import { CodeBlock } from './components/CodeBlock'
 import { StatBar } from './components/StatBar'
+import { HowItWorks } from './components/HowItWorks'
+import { CaseStudies } from './components/CaseStudies'
+import { InstallMatrix } from './components/InstallMatrix'
 import { Reveal } from './components/smoothui/Reveal'
 import { TextRise } from './components/smoothui/TextRise'
 import { MagneticButton } from './components/smoothui/MagneticButton'
 import { AnimatedNumber } from './components/smoothui/AnimatedNumber'
 import { cn } from './lib/utils'
-import {
-  SKILLS,
-  RULES,
-  STATS,
-  SLOP_SAMPLE,
-  CRAFT_SAMPLE,
-  INSTALL_CLAUDE,
-  INSTALL_COPILOT,
-  SOURCES,
-  REPO_URL,
-} from './data'
+import { SKILLS, RULES, STATS, SOURCES, REPO_URL } from './data'
 
 function HeroStat({ value, suffix, label }: { value: number; suffix?: string; label: string }) {
   return (
@@ -72,7 +64,7 @@ export default function App() {
               <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
                 AI agents write fast and leave a maintenance wake — duplication up,
                 refactoring down, confident-but-wrong everywhere. <strong className="font-semibold text-foreground">craft</strong> is
-                a plugin of eight skills and a twelve-rule constitution that makes
+                a plugin of nine skills and a thirteen-rule constitution that makes
                 your agent write the <em className="text-foreground not-italic underline decoration-teal/50 underline-offset-4">strategic</em> version —
                 and prove it before it says “done.”
               </p>
@@ -152,51 +144,37 @@ export default function App() {
         </div>
       </section>
 
-      {/* ───────────────────── Before / after ───────────────────── */}
-      <section className="border-b border-border py-20 sm:py-28">
+      {/* ───────────────────── How it works ───────────────────── */}
+      <section id="how" className="border-b border-border py-20 sm:py-28">
         <div className="container">
-          <SectionHeading eyebrow="Same task, two outcomes" title="Watch the difference">
-            A model asked to “add a user.” One answer is a maintenance liability.
-            The other is the change that was actually requested.
+          <SectionHeading eyebrow="How it works" title="From raw output to a verdict">
+            craft sits between your agent and “done.” The router reads the change,
+            the right skills detect and fix the failure modes, and nothing ships
+            until the work is proven — while building, or as a gate after.
           </SectionHeading>
-
-          <div className="mx-auto mt-14 grid max-w-5xl items-start gap-6 lg:grid-cols-2">
-            <Reveal from="right">
-              <div className="mb-3 flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-danger" />
-                <span className="font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground">
-                  without craft
-                </span>
-              </div>
-              <CodeBlock sample={SLOP_SAMPLE} accent="danger" />
-              <p className="mt-3 text-sm text-muted-foreground">
-                Speculative abstraction for one caller, plus a{' '}
-                <code className="text-danger">catch</code> that swallows the failure.
-                Compiles. Ships. Breaks quietly in prod.
-              </p>
-            </Reveal>
-
-            <Reveal from="left" delay={0.12}>
-              <div className="mb-3 flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-teal" />
-                <span className="font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground">
-                  with craft
-                </span>
-              </div>
-              <CodeBlock sample={CRAFT_SAMPLE} accent="teal" />
-              <p className="mt-3 text-sm text-muted-foreground">
-                Validate at the boundary, no dead interface, errors stay visible.
-                The diff is exactly what was asked for — and easy to change next week.
-              </p>
-            </Reveal>
-          </div>
+          <HowItWorks />
         </div>
       </section>
 
-      {/* ───────────────────── The eight skills ───────────────────── */}
+      {/* ──────────────── Case studies — seeing is believing ──────────────── */}
+      <section id="examples" className="border-b border-border py-20 sm:py-28">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Seeing is believing"
+            title="Six problems it catches out of the box"
+          >
+            Real failure modes, before and after. Pick one — the slop on the left
+            compiles and ships; the craft version on the right is the change you
+            actually wanted, with the rule it enforced.
+          </SectionHeading>
+          <CaseStudies />
+        </div>
+      </section>
+
+      {/* ───────────────────── The nine skills ───────────────────── */}
       <section id="skills" className="border-b border-border py-20 sm:py-28">
         <div className="container">
-          <SectionHeading eyebrow="The toolkit" title="Eight skills, one router">
+          <SectionHeading eyebrow="The toolkit" title="Nine skills, one router">
             Each skill targets a documented AI failure mode. The{' '}
             <code className="font-mono text-primary">production-grade</code> router fires
             the right ones — before code is written, or to audit a diff after.
@@ -242,10 +220,10 @@ export default function App() {
         </div>
       </section>
 
-      {/* ───────────────────── The 12 rules ───────────────────── */}
+      {/* ───────────────────── The 13 rules ───────────────────── */}
       <section id="rules" className="border-b border-border py-20 sm:py-28">
         <div className="container">
-          <SectionHeading eyebrow="The constitution" title="Twelve rules, always on">
+          <SectionHeading eyebrow="The constitution" title="Thirteen rules, always on">
             Loaded into every session. They distill the judgment a 15-year engineer
             applies without thinking — made explicit so your agent does too.
           </SectionHeading>
@@ -319,31 +297,13 @@ export default function App() {
       {/* ───────────────────── Install ───────────────────── */}
       <section id="install" className="border-b border-border py-20 sm:py-28">
         <div className="container">
-          <SectionHeading eyebrow="Two minutes" title="Works where your team works">
-            Native plugin for Claude Code. Ported, model-agnostic guardrails for
-            GitHub Copilot — completions, chat, and automated PR review.
+          <SectionHeading eyebrow="Two minutes · any tool" title="Works where your team works">
+            One constitution, every agentic coding platform — Claude Code, Cursor,
+            GitHub Copilot, Windsurf, Cline, Codex and more. Pick a tool, click to
+            copy one command, ship.
           </SectionHeading>
 
-          <div className="mx-auto mt-14 grid max-w-5xl gap-6 lg:grid-cols-2">
-            <Reveal from="right">
-              <div className="mb-3 flex items-center gap-2">
-                <Terminal className="h-4 w-4 text-primary" />
-                <span className="font-mono text-sm font-semibold text-foreground">
-                  Claude Code
-                </span>
-              </div>
-              <CodeBlock sample={INSTALL_CLAUDE} accent="gold" />
-            </Reveal>
-            <Reveal from="left" delay={0.12}>
-              <div className="mb-3 flex items-center gap-2">
-                <GithubIcon className="h-4 w-4 text-teal" />
-                <span className="font-mono text-sm font-semibold text-foreground">
-                  GitHub Copilot
-                </span>
-              </div>
-              <CodeBlock sample={INSTALL_COPILOT} accent="teal" />
-            </Reveal>
-          </div>
+          <InstallMatrix />
 
           <Reveal delay={0.1}>
             <div className="mt-12 flex justify-center">

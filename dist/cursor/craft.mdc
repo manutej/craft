@@ -1,3 +1,9 @@
+---
+description: craft — senior-engineer code-quality guardrails (anti AI-slop)
+globs:
+alwaysApply: true
+---
+
 # craft — The Constitution (always-on rules)
 
 > **Load this file into every agentic coding session.** Drop it into your repo's

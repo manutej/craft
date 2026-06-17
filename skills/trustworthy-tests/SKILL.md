@@ -19,6 +19,12 @@ the actual feature is broken because the agent never ran it. And they declare "d
 production-ready" on confidence alone, which Stanford showed is *inversely* correlated
 with correctness. This skill makes tests load-bearing and makes "done" require evidence.
 
+> The deeper reason execution is non-negotiable: the most expensive slop is
+> **clean-but-wrong** — idiomatic, well-structured code with an off-by-one, an
+> inverted condition, a wrong default. It is invisible to on-sight review *by
+> construction*; only running the code catches it. Every other craft skill reads the
+> diff. This one runs it.
+
 > This is discipline, not mechanics. For the *how* of writing tests use the existing
 > `test-coverage-analyzer`, `pytest-patterns`, `jest-react-testing`. This skill decides
 > whether a test is *worth* anything and whether the work is actually finished.
@@ -47,7 +53,15 @@ tests nothing.
    end-to-end and show the evidence: the test output, the curl request/response, the log
    line, the screenshot. "It should work" / "this is production-ready" without evidence is
    not done. Your confidence is near-zero signal.
-6. **Pin before you refactor untested code (Feathers).** If you're about to change code
+6. **Prove the test tests the fix: red → green.** A test that has never failed proves
+   nothing about your change — it may pass for any code at all. Run it against the
+   pre-change code (stash the fix, or write the test first) and watch it **fail for the
+   right reason**, then watch it pass. One red run is worth a hundred green ones.
+7. **A tool error means *my change is wrong* until proven otherwise.** When the test
+   runner, linter, or build errors, the reflex "the environment is broken" is how agents
+   talk themselves past real failures. Investigate your own diff first; blame the
+   environment only with evidence.
+8. **Pin before you refactor untested code (Feathers).** If you're about to change code
    with no tests, first write a **characterization test** that locks in its *current*
    behavior. Then refactor. Otherwise "refactor" silently becomes "rewrite with
    regressions" and nobody notices until prod.
@@ -61,21 +75,28 @@ tests nothing.
 - 100% "coverage" with no edge cases — coverage measures lines executed, not behavior
   verified.
 - A "done" / "production-ready" claim with no command output or run evidence anywhere.
+- A new test that also passes on the **unmodified** code — it has never been red, so it
+  doesn't test the change.
+- A test/build failure waved off as "flaky" or "environment issue" with no investigation.
 - Refactor of previously-untested code with no characterization test added first.
 - Snapshot tests blindly regenerated on every change (rubber-stamping, not testing).
 
 ## The Definition-of-Done evidence gate
 
-A task is done only when you can paste evidence it *ran*:
+A task is done only when you can paste evidence it *ran* — including the **red run**
+that proves the test is connected to the fix:
 ```
 ✅ Done. Evidence:
-$ pytest tests/test_checkout.py -q
-... 14 passed in 0.4s
+$ git stash && pytest tests/test_checkout.py -q       # before the change
+... 1 failed (test_discount_applies) in 0.3s          # red, for the right reason
+$ git stash pop && pytest tests/test_checkout.py -q   # after
+... 14 passed in 0.4s                                  # green
 $ curl -s localhost:8000/checkout -d '{"cart":...}' | jq .status
 "confirmed"
 ```
 No evidence → say "implemented but unverified," not "done." Honesty about an unverified
-state beats a false "production-ready."
+state beats a false "production-ready." For schema/data changes, the evidence is a
+dry-run on a copy — see `craft:data-and-state-evolution`.
 
 ## Inline example
 
@@ -100,9 +121,10 @@ it("rejects an unknown code", () => {
 ## Critique mode
 
 For each test: what real bug makes it fail? If "none," flag it. Check for mock-only
-assertions, implementation-mirroring, missing edge cases, and — for the change as a whole
-— whether there's evidence it actually ran. Tag `[trustworthy-tests · tautological-test|
-no-edge-cases|unverified-done|no-characterization-test · SEV]`.
+assertions, implementation-mirroring, missing edge cases, whether any new test was ever
+seen red, and — for the change as a whole — whether there's evidence it actually ran.
+Tag `[trustworthy-tests · tautological-test|no-edge-cases|never-seen-red|
+unverified-done|no-characterization-test · SEV]`.
 
 ## References
 - Characterization tests / seams: `../../references/PRINCIPLES.md` §D (Feathers)

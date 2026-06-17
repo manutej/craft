@@ -136,6 +136,17 @@ Caveman voice, serious points. The anti-over-engineering manifesto.
   imperative. Practice defensive programming: validate at boundaries.
 - **Kernighan & Pike — The Practice of Programming.** Prefer clear over clever. "Let
   the data structure the program." Simplicity, clarity, generality — in that order.
+- **Sadalage & Fowler — Evolutionary Database Design**
+  (martinfowler.com/articles/evodb.html). "All database changes are migrations" —
+  first-class artifacts, versioned and tested like code, applied as a sequence of
+  small automated steps, with transition phases supporting old and new access
+  patterns simultaneously. Book-length treatment: *Refactoring Databases* (Ambler &
+  Sadalage, 2006).
+- **Sato — Parallel Change / expand-and-contract**
+  (martinfowler.com/bliki/ParallelChange.html). "A pattern to implement
+  backward-incompatible changes to an interface in a safe manner": **expand** (add
+  the new shape alongside the old), **migrate** (move every client), **contract**
+  (remove the old shape) — three deploys, never one.
 
 ---
 
@@ -147,8 +158,9 @@ Caveman voice, serious points. The anti-over-engineering manifesto.
 3. **No abstraction without ≥2–3 real call sites** — let cut-points emerge.
 4. **Deep modules / hide decisions** — simple interfaces over big implementations.
 5. **Define errors out of existence; validate at boundaries; never swallow.**
-6. **Prove it ran; no tautological tests; pin before you refactor.**
-7. **Verify every dependency; never inline secrets.**
-8. **Clear over clever; comments carry intent.**
-9. **Distrust your own confidence — require external evidence.**
-10. **Enforce mechanically, not just verbally.**
+6. **Prove it ran; no tautological tests; red before green; pin before you refactor.**
+7. **Phase every persistent-shape change — expand, migrate, contract.**
+8. **Verify every dependency; never inline secrets.**
+9. **Clear over clever; comments carry intent.**
+10. **Distrust your own confidence — require external evidence.**
+11. **Enforce mechanically, not just verbally.**

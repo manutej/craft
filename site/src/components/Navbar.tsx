@@ -4,8 +4,9 @@ import { REPO_URL } from '@/data'
 
 const LINKS = [
   { href: '#problem', label: 'The cost' },
+  { href: '#how', label: 'How it works' },
+  { href: '#examples', label: 'Examples' },
   { href: '#skills', label: 'Skills' },
-  { href: '#rules', label: 'Rules' },
   { href: '#install', label: 'Install' },
 ]
 

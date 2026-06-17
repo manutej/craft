@@ -12,7 +12,7 @@ moving on tomorrow. Working code is not the bar; **code the next person can read
 and change** is the bar. When two approaches both work, pick the one that leaves the
 system **Easier To Change**.
 
-## The 12 rules
+## The 13 rules
 
 1. **Smallest change that satisfies the request.** No unrequested features, files,
    abstractions, config, or "while I'm here" edits. The diff matches the ask.
@@ -42,14 +42,21 @@ system **Easier To Change**.
     packages don't exist (slopsquatting). Confirm every new package is real and canonical
     before importing. Don't call methods/fields not in the real type/docs. Never hardcode
     secrets or environment-specific values — config lives in the environment.
+13. **Data outlives code: change persistent shapes in phases, never in one shot.** Any
+    backward-incompatible schema/payload/event change ships expand → migrate → contract,
+    so old and new code survive the same deploy window. NOT NULL needs a default or
+    backfill; backfills run batched; every migration has a tested rollback and a dry-run
+    on a copy.
 
 ## Definition of Done
 
 A change is **not done** until: the diff is minimal and on-scope · no new duplication ·
 no abstraction without ≥2–3 call sites · inputs validated at boundaries · no swallowed
 errors · no hardcoded secrets · names are intention-revealing · tests assert behavior
-(not mocks) and **you ran it with evidence** · every new dependency verified. If you can't
-honestly meet a criterion, say so. *"It probably works" is not done.*
+(not mocks) and **you ran it with evidence** · any new test was seen to **fail before**
+the change and pass after · any migration dry-run on a copy with rollback tested ·
+every new dependency verified. If you can't honestly meet a criterion, say so.
+*"It probably works" is not done.*
 
 ## Why these rules exist
 
@@ -61,5 +68,6 @@ the output was correct. These rules force durable code over fast-but-disposable 
 
 Detailed guidance auto-loads by file type from `.github/instructions/`: over-engineering,
 boundary robustness, DRY/reuse, code smells, effects/purity, naming/comments, trustworthy
-tests, supply-chain hygiene, and per-language tells (Python, TypeScript, Go). For a full
-merge-gate review, run the `/senior-review` prompt (`.github/prompts/senior-review.prompt.md`).
+tests, data/state evolution, supply-chain hygiene, and per-language tells (Python,
+TypeScript, Go). For a full merge-gate review, run the `/senior-review` prompt
+(`.github/prompts/senior-review.prompt.md`).

@@ -17,7 +17,7 @@ description: >-
 **Purpose**: be the 15-year senior engineer who can glance at a change and say
 *"this won't survive contact with production, and here's exactly why."* This skill
 decomposes a request, dispatches to the right guardrails, and merges their output
-into one verdict — instead of dumping nine separate checklists.
+into one verdict — instead of dumping ten separate checklists.
 
 Anchor frame (state it, then act on it): **an AI coding agent is a Tactical Tornado
 by default** — fast, prolific, leaving a maintenance wake. Every move here forces
@@ -39,7 +39,7 @@ by default** — fast, prolific, leaving a maintenance wake. Every move here for
 ### Mode A — Generative Guard (before/while writing code)
 Pull the relevant reflex cards into context *before* the agent writes, so the code is
 born right instead of being fixed later.
-1. Read `RULES.md` (the 12 rules + Definition of Done) — always.
+1. Read `RULES.md` (the 13 rules + Definition of Done) — always.
 2. Classify the task and load the matching member skills' Tier-1 reflex cards
    (the table below).
 3. Build with the smallest-diff-that-works discipline.
@@ -48,7 +48,7 @@ born right instead of being fixed later.
 
 ### Mode B — Critique (auditing a diff / file / PR)
 Return **one ranked, worst-first list**, each item tagged `[skill · principle ·
-severity]`, with the concrete fix. Not nine lists. Not vibes.
+severity]`, with the concrete fix. Not ten lists. Not vibes.
 1. Determine what changed (the diff) and what it touches.
 2. Fire the relevant lenses (below) in dependency order.
 3. **Merge & dedupe** findings; one issue may trip several lenses — report it once,
@@ -67,6 +67,7 @@ severity]`, with the concrete fix. Not nine lists. Not vibes.
 | Logic tangled with I/O / mutation / nondeterminism | `craft:effects-and-purity` | craft |
 | Names, comments, readability | `craft:naming-and-comments` | craft |
 | Tests (writing or judging them); "is it actually done?" | `craft:trustworthy-tests` | craft |
+| Schema / migration / payload / event-shape change | `craft:data-and-state-evolution` | craft |
 | New dependency / external API call | `craft:supply-chain-hygiene` | craft |
 | Quantified complexity metrics (cyclomatic/cognitive) | `complexity-analysis` | existing |
 | The concrete refactoring to apply once a smell is found | `refactoring-patterns` | existing |
@@ -88,8 +89,9 @@ Run lenses outside-in, cheap-and-structural first:
 4. **Robustness** — validation, errors, secrets (`robustness-at-boundaries`)
 5. **Effects** — purity / testability (`effects-and-purity`)
 6. **Clarity** — names & comments (`naming-and-comments`)
-7. **Trust** — tests prove behavior; it actually ran (`trustworthy-tests`)
-8. **Supply chain** — deps verified, no hallucinated APIs (`supply-chain-hygiene`)
+7. **Trust** — tests prove behavior; it actually ran, red→green (`trustworthy-tests`)
+8. **Data & state** — shape changes phased, rollback tested (`data-and-state-evolution`)
+9. **Supply chain** — deps verified, no hallucinated APIs (`supply-chain-hygiene`)
 
 ## Tension resolution (when guardrails conflict)
 
@@ -128,7 +130,7 @@ severity. Never assert taste without a named principle. Praise is fine but brief
 this is editing, not a performance review.
 
 ## References
-- The 12 rules + Definition of Done: `../../RULES.md`
+- The 13 rules + Definition of Done: `../../RULES.md`
 - Why durable code wins: `../../references/PRINCIPLES.md`
 - The smell catalog: `../../references/SMELLS.md`
 - The data behind all of it: `../../references/EVIDENCE.md`

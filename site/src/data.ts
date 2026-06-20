@@ -259,7 +259,7 @@ export const PLATFORMS: Platform[] = [
     id: 'claude-code',
     name: 'Claude Code',
     mark: 'C',
-    tagline: 'Native plugin — 9 skills auto-load by description + a /senior-review gate.',
+    tagline: 'Native plugin — 9 guardrail skills + router auto-load by description, plus /senior-review.',
     target: '~/.claude/plugins/craft',
     command: `git clone https://github.com/manutej/craft \\\n  ~/.claude/plugins/craft`,
     note: 'Then run /senior-review on any diff, or call any skill by name (craft:right-sized-design).',

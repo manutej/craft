@@ -9,9 +9,9 @@
   "plugins": [
     {
       "name": "craft",
-      "source": ".",
+      "source": "./",
       "displayName": "Craft \u2014 Senior-Engineer Code-Quality Guardrails",
-      "description": "Nine composable skills + an always-on rules constitution + a /senior-review gate. Forces strategic (durable) code over tactical (fast-but-disposable) code: code-smells detection, DRY/reuse discipline, effects-vs-purity separation, naming-and-comments, right-sized-design (anti over-engineering), robustness-at-boundaries, supply-chain-hygiene (catches hallucinated packages), trustworthy-tests, and data-and-state-evolution (safe schema/migration changes) \u2014 all orchestrated by a production-grade router skill. Use it FIRST on any 'is this production-ready?' or 'review this diff/PR' request.",
+      "description": "Ten plugin skills (nine composable guardrails + the production-grade router), an always-on rules constitution, and a /senior-review gate. Forces strategic (durable) code over tactical (fast-but-disposable): code-smells detection, DRY/reuse discipline, effects-vs-purity separation, naming-and-comments, right-sized-design, robustness-at-boundaries, supply-chain-hygiene, trustworthy-tests, and data-and-state-evolution. Use it FIRST on any 'is this production-ready?' or 'review this diff/PR' request.",
       "version": "0.2.0",
       "author": {
         "name": "CETI \u2014 Center for Educational Technology Innovations",

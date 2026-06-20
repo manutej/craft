@@ -4,8 +4,8 @@
 
 <br/>
 
-![skills](https://img.shields.io/badge/skills-8%20%2B%20router-E3B341?style=flat-square&labelColor=0D1117)
-![rules](https://img.shields.io/badge/rules-12-39C5BB?style=flat-square&labelColor=0D1117)
+![skills](https://img.shields.io/badge/skills-9%20%2B%20router-E3B341?style=flat-square&labelColor=0D1117)
+![rules](https://img.shields.io/badge/rules-13-39C5BB?style=flat-square&labelColor=0D1117)
 ![AI slop](https://img.shields.io/badge/AI%20slop-blocked-F85149?style=flat-square&labelColor=0D1117)
 ![works with](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Cursor%20·%20Copilot%20·%20Windsurf%20·%20Cline%20·%20Codex-39C5BB?style=flat-square&labelColor=0D1117)
 ![grounded in](https://img.shields.io/badge/grounded%20in-Pragmatic%20·%20Fowler%20·%20Ousterhout-58A6FF?style=flat-square&labelColor=0D1117)

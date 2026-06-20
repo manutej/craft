@@ -64,7 +64,7 @@ export default function App() {
               <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
                 AI agents write fast and leave a maintenance wake — duplication up,
                 refactoring down, confident-but-wrong everywhere. <strong className="font-semibold text-foreground">craft</strong> is
-                a plugin of nine skills and a thirteen-rule constitution that makes
+                nine guardrail skills, a router, and a thirteen-rule constitution that make
                 your agent write the <em className="text-foreground not-italic underline decoration-teal/50 underline-offset-4">strategic</em> version —
                 and prove it before it says “done.”
               </p>
@@ -90,8 +90,8 @@ export default function App() {
 
             <Reveal delay={0.42}>
               <div className="mt-10 flex gap-10 border-t border-border pt-6">
-                <HeroStat value={8} label="composable skills" />
-                <HeroStat value={12} label="always-on rules" />
+                <HeroStat value={9} label="guardrail skills" />
+                <HeroStat value={13} label="always-on rules" />
                 <HeroStat value={6} label="canon sources" />
               </div>
             </Reveal>

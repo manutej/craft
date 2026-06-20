@@ -1,7 +1,7 @@
 {
   "name": "craft",
   "version": "0.2.0",
-  "description": "Senior-engineer guardrails that stop AI coding agents from shipping slop. Nine composable skills + an always-on rules constitution + a /senior-review gate with an execution-evidence Definition of Done. Forces strategic (durable) code over tactical (fast-but-disposable) code, grounded in The Pragmatic Programmer, Fowler's Refactoring, Ousterhout's A Philosophy of Software Design, and empirical AI-code-quality research.",
+  "description": "Senior-engineer guardrails that stop AI coding agents from shipping slop. Ten plugin skills (nine composable guardrails + the production-grade router), an always-on rules constitution, and a /senior-review gate with an execution-evidence Definition of Done. Forces strategic (durable) code over tactical (fast-but-disposable) code, grounded in The Pragmatic Programmer, Fowler's Refactoring, Ousterhout's A Philosophy of Software Design, and empirical AI-code-quality research.",
   "author": {
     "name": "CETI \u2014 Center for Educational Technology Innovations",
     "url": "https://cetiai.co"
